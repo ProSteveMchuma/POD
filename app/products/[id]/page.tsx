@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, use } from "react";
 
-export default function ProductDesignPage({ params }: { params: { id: string } }) {
+export default function ProductDesignPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [selectedColor, setSelectedColor] = useState("White");
   const [selectedSize, setSelectedSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
@@ -12,7 +13,7 @@ export default function ProductDesignPage({ params }: { params: { id: string } }
   const [fontSize, setFontSize] = useState("24");
 
   const product = {
-    id: params.id,
+    id: id,
     name: "Custom T-Shirt",
     description: "High-quality cotton t-shirt with custom print",
     basePrice: 19.99,
